@@ -1,15 +1,17 @@
 package br.com.ailton.JotinhaStore.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Usuario")
@@ -23,6 +25,10 @@ public class Usuario implements Serializable{
 	private String email;
 	private String telefone;
 	private String senha;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Usuario() {
  
@@ -75,7 +81,9 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
-
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
 
 	
 }

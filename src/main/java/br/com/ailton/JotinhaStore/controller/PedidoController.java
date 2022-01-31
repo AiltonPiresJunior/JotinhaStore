@@ -1,7 +1,6 @@
 package br.com.ailton.JotinhaStore.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,34 +9,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ailton.JotinhaStore.domain.Usuario;
-import br.com.ailton.JotinhaStore.service.UsuarioService;
+import br.com.ailton.JotinhaStore.domain.Pedido;
+import br.com.ailton.JotinhaStore.service.PedidoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/jotinhaStore/api-docs/usuario")
-@Api(value = "Usuario", tags = { "Usuario"})
-public class UsuarioController {
+@RequestMapping(path ="/jotinhaStore/api-docs/pedido")
+@Api(value = "Pedido", tags = {"Pedido"})
+public class PedidoController {
 	
 	@Autowired
-	public UsuarioService usuarioService;
+	public PedidoService pedidoService;
 	
 	@GetMapping(value = "/all")
-	@ApiOperation(value = "Listar todos os Usuarios")
-	public List<Usuario> findAll(){
+	@ApiOperation(value = "Listar todos os Pedidos")
+	public List<Pedido> findAll(){
 		
-		List<Usuario> usuario = usuarioService.findAll();
-		return usuario;
+		List<Pedido> pedido = pedidoService.findAll();
+		return pedido;
 	}
 	
 	@GetMapping(value = "/{id}")
 	@ApiOperation(value = "Buscar Usuario por Id")
-	public ResponseEntity<Usuario> findById(@PathVariable Long id) {
-		Usuario usuario = usuarioService.findById(id);
-		return ResponseEntity.ok().body(usuario);
+	public ResponseEntity<Pedido> findById(@PathVariable Long id) {
+		Pedido pedido = pedidoService.findById(id);
+		return ResponseEntity.ok().body(pedido);
 	}
 	
-	
-
 }

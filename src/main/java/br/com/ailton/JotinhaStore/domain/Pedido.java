@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.ailton.JotinhaStore.enumerations.PedidoStatusEnum;
+
 @Entity
 @Table(name = "Pedido")
 public class Pedido implements Serializable{
@@ -22,6 +24,8 @@ public class Pedido implements Serializable{
 	private Long id;
 	private Instant momento;
 	
+	private PedidoStatusEnum pedidoStatus;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_client")
 	private Usuario cliente;
@@ -30,10 +34,11 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Long id, Instant momento, Usuario cliente) {
+	public Pedido(Long id, Instant momento,PedidoStatusEnum pedidoStatus,  Usuario cliente) {
 		super();
 		this.id = id;
 		this.momento = momento;
+		this.pedidoStatus = pedidoStatus;
 		this.cliente = cliente;
 	}
 
@@ -61,6 +66,14 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 
+	public PedidoStatusEnum getPedidoStatus() {
+		return pedidoStatus;
+	}
+
+	public void setPedidoStatus(PedidoStatusEnum pedidoStatus) {
+		this.pedidoStatus = pedidoStatus;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -85,6 +98,7 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
+
 
 	
 }

@@ -1,6 +1,7 @@
 package br.com.ailton.JotinhaStore.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return lista;
 	}
 
-	
-
-	
-	
-
+	public Usuario findById(Long id) {
+		Optional<Usuario> usuario = usuarioRepository.findById(id);
+		return usuario.get();
+	}
 }

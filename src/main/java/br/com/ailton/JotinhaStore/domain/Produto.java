@@ -8,14 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Produto")
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -23,48 +25,58 @@ public class Produto implements Serializable{
 	private String descricao;
 	private Double preco;
 	private Long imgUrl;
-	
-	@Transient
+
+	@ManyToMany
+	@JoinTable(name = "produto_sub_categoria", joinColumns = @JoinColumn(name = "id_produto"), inverseJoinColumns = @JoinColumn(name = "id_sub_categoria"))
 	private Set<SubCategoria> subCategoria = new HashSet<>();
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 	public Double getPreco() {
 		return preco;
 	}
+
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+
 	public Long getImgUrl() {
 		return imgUrl;
 	}
+
 	public void setImgUrl(Long imgUrl) {
 		this.imgUrl = imgUrl;
 	}
+
 	public Set<SubCategoria> getSubCategoria() {
 		return subCategoria;
 	}
-	
+
 	public Produto() {
 	}
-	
+
 	public Produto(Long id, String nome, String descricao, Double preco, Long imgUrl) {
 		this.id = id;
 		this.nome = nome;
@@ -72,7 +84,7 @@ public class Produto implements Serializable{
 		this.preco = preco;
 		this.imgUrl = imgUrl;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,7 +92,7 @@ public class Produto implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

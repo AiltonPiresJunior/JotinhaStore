@@ -2,54 +2,38 @@ package br.com.ailton.JotinhaStore.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.ailton.JotinhaStore.enumerations.PedidoStatusEnum;
-
 @Entity
-@Table(name = "Pedido")
-public class Pedido implements Serializable{
+@Table(name = "Pagamento")
+public class Pagamento implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Instant momento;
 	
-	private PedidoStatusEnum pedidoStatus;
+	@OneToOne
+	@MapsId
+	private Pedido pedido;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_client")
-	private Usuario cliente;
-	
-	@OneToMany(mappedBy = "id.pedido")
-	private Set<PedidoItem> itens = new HashSet<>();
-	
-	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
-	private Pagamento pagamento;
-	
-	public Pedido() {
+	public Pagamento() {
 		
 	}
 
-	public Pedido(Long id, Instant momento,PedidoStatusEnum pedidoStatus,  Usuario cliente) {
-		super();
+	public Pagamento(Long id, Instant momento, Pedido pedido) {
 		this.id = id;
 		this.momento = momento;
-		this.pedidoStatus = pedidoStatus;
-		this.cliente = cliente;
+		this.pedido = pedido;
 	}
 
 	public Long getId() {
@@ -68,24 +52,12 @@ public class Pedido implements Serializable{
 		this.momento = momento;
 	}
 
-	public Usuario getCliente() {
-		return cliente;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setCliente(Usuario cliente) {
-		this.cliente = cliente;
-	}
-
-	public PedidoStatusEnum getPedidoStatus() {
-		return pedidoStatus;
-	}
-
-	public void setPedidoStatus(PedidoStatusEnum pedidoStatus) {
-		this.pedidoStatus = pedidoStatus;
-	}
-	
-	public Set<PedidoItem> getItens(){
-		return itens;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	@Override
@@ -104,7 +76,7 @@ public class Pedido implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pedido other = (Pedido) obj;
+		Pagamento other = (Pagamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -112,7 +84,8 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-
-
+	
+	
+	
 	
 }

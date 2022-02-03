@@ -59,9 +59,7 @@ public class PedidoItem implements Serializable {
 	public void setProduto(Produto produto) {
 		id.setProduto(produto);
 	}
-	
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

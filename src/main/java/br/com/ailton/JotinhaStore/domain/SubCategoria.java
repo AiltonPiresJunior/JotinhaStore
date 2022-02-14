@@ -15,6 +15,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Sub_Categoria")
 public class SubCategoria implements Serializable{
@@ -61,6 +70,8 @@ public class SubCategoria implements Serializable{
 	public Set<Produto> getProduto() {
 		return produto;
 	}
+	
+
 
 	@Override
 	public int hashCode() {
@@ -93,12 +104,6 @@ public class SubCategoria implements Serializable{
 		this.nome = nome;
 		this.categoria = categoria;
 	}
-
-	public SubCategoria() {
-	}
-
-
-	
 	
 
 }

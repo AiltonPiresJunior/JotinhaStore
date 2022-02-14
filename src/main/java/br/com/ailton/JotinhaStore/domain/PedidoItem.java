@@ -20,7 +20,6 @@ public class PedidoItem implements Serializable {
 	private Integer quantidade;
 	private Double preco;
 	
-	
 	public PedidoItem() {
 	}
 	public PedidoItem(Pedido pedido, Produto produto,  Integer quantidade, Double preco) {
@@ -58,6 +57,10 @@ public class PedidoItem implements Serializable {
 	
 	public void setProduto(Produto produto) {
 		id.setProduto(produto);
+	}
+	
+	public Double getSubTotal() {
+		return preco * quantidade;
 	}
 
 	@Override

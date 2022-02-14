@@ -1,4 +1,4 @@
-package br.com.ailton.JotinhaStore.service;
+package br.com.ailton.JotinhaStore.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.ailton.JotinhaStore.domain.Categoria;
 import br.com.ailton.JotinhaStore.repository.CategoriaRepository;
+import br.com.ailton.JotinhaStore.service.CategoriaService;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService{

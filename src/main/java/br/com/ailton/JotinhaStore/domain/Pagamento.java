@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Pagamento")
@@ -21,19 +24,20 @@ public class Pagamento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Instant momento;
-	
+		
+	@JsonIgnore
 	@OneToOne
-	@MapsId
+	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
 	
 	public Pagamento() {
 		
 	}
 
-	public Pagamento(Long id, Instant momento, Pedido pedido) {
+	public Pagamento(Long id, Instant momento, Pedido pedido_id) {
 		this.id = id;
 		this.momento = momento;
-		this.pedido = pedido;
+		this.pedido = pedido_id;
 	}
 
 	public Long getId() {

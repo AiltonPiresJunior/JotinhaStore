@@ -21,7 +21,7 @@ public class PagamentoController {
 	
 	@Autowired
 	public PagamentoService pagamentoService;
-	
+
 	@GetMapping(value = "/all")
 	@ApiOperation(value = "Listar todos os pagamentos")
 	public List<Pagamento> findAll(){
@@ -29,7 +29,7 @@ public class PagamentoController {
 		List<Pagamento> pagamento = pagamentoService.findAll();
 		return pagamento;
 	}
-	
+
 	@GetMapping(value = "/{id}")
 	@ApiOperation(value = "Buscar pagamento por Id")
 	public ResponseEntity<Pagamento> findById(@PathVariable Long id) {

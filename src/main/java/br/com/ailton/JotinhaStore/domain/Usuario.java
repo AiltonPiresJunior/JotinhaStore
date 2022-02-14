@@ -13,6 +13,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Usuario")
 public class Usuario implements Serializable{
@@ -30,9 +39,6 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
-	public Usuario() {
- 
-	}
 
 	public Usuario(String nome, String email, String telefone, String senha) {
 		this.nome = nome;

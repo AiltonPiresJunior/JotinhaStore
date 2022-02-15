@@ -14,4 +14,6 @@ public interface CategoriaService {
 	CategoriaDTO cadastraCategoria(CategoriaDTO categoriaDTO);
 
 	CategoriaDTO alteraCategoria(CategoriaDTO categoriaDTO, Long id);
+
+	Categoria deletaCategoria(Long id);
 }

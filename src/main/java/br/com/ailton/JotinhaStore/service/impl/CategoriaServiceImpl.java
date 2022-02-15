@@ -50,4 +50,12 @@ public class CategoriaServiceImpl implements CategoriaService{
 		
 		return categoriaMapper.toDto(categoria);
 	}
+
+	public Categoria deletaCategoria(Long id) {
+		Categoria categoria = findCategoriaById(id);
+		
+		categoriaRepository.delete(categoria);
+				
+		return categoria;
+	}
 }

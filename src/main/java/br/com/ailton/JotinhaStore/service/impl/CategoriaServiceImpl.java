@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.com.ailton.JotinhaStore.domain.Categoria;
 import br.com.ailton.JotinhaStore.dto.CategoriaDTO;
+import br.com.ailton.JotinhaStore.enumerations.ErrorsEnum;
 import br.com.ailton.JotinhaStore.mapper.CategoriaMapper;
 import br.com.ailton.JotinhaStore.repository.CategoriaRepository;
 import br.com.ailton.JotinhaStore.service.CategoriaService;
+import br.com.ailton.JotinhaStore.service.exception.BusinessException;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService{
@@ -26,14 +29,23 @@ public class CategoriaServiceImpl implements CategoriaService{
 		return lista;
 	}
 
-	public Categoria findById(Long id) {
-		Optional<Categoria> categoria = categoriaRepository.findById(id);
-		return categoria.get();
+	public Categoria findCategoriaById(Long id) {
+		return categoriaRepository.findById(id)
+                .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, ErrorsEnum.NAO_ENCONTROU));
 	}
 
 	public CategoriaDTO cadastraCategoria(CategoriaDTO categoriaDTO) {
 		Categoria categoria = categoriaMapper.toEntidade(categoriaDTO);
 		
+		categoriaRepository.save(categoria);
+		
+		return categoriaMapper.toDto(categoria);
+	}
+
+	public CategoriaDTO alteraCategoria(CategoriaDTO categoriaDTO, Long id) {
+		Categoria categoria = findCategoriaById(id);
+		
+		categoria.setNome(categoriaDTO.getNome());
 		categoriaRepository.save(categoria);
 		
 		return categoriaMapper.toDto(categoria);

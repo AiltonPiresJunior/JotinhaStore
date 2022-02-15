@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,13 +42,19 @@ public class CategoriaController {
 	@GetMapping(value = "/{id}")
 	@ApiOperation(value = "Buscar Categoria por Id")
 	public ResponseEntity<Categoria> findById(@PathVariable Long id) {
-		Categoria categoria = categoriaService.findById(id);
+		Categoria categoria = categoriaService.findCategoriaById(id);
 		return ResponseEntity.ok().body(categoria);
 	}
 	
 	@PostMapping
 	@ApiOperation(value = "Cadastrar Categoria")
-	public ResponseEntity<CategoriaDTO> cadastra(@RequestBody CategoriaDTO categoriaDTO) {			
+	public ResponseEntity<CategoriaDTO> cadastraCategoria(@RequestBody CategoriaDTO categoriaDTO) {			
 		return ResponseEntity.ok().body(categoriaService.cadastraCategoria(categoriaDTO));
+	}
+	
+	@PutMapping(value = "/{id}")
+	@ApiOperation(value = "Alterar Categoria id")
+	public ResponseEntity<CategoriaDTO> alteraCategoria(@RequestBody CategoriaDTO categoriaDTO, Long id){
+		return ResponseEntity.ok().body(categoriaService.alteraCategoria(categoriaDTO,id));
 	}
 }

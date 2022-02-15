@@ -9,7 +9,9 @@ public interface CategoriaService {
 
 	List<Categoria> findAll();
 
-	Categoria findById(Long id);
+	Categoria findCategoriaById(Long id);
 
 	CategoriaDTO cadastraCategoria(CategoriaDTO categoriaDTO);
+
+	CategoriaDTO alteraCategoria(CategoriaDTO categoriaDTO, Long id);
 }

@@ -13,6 +13,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Categoria")
 public class Categoria implements Serializable {
@@ -48,17 +57,6 @@ public class Categoria implements Serializable {
 	}
 
 	public void setSubCategoria(List<SubCategoria> subCategoria) {
-		this.subCategoria = subCategoria;
-	}
-
-	public Categoria() {
-		super();
-	}
-
-	
-	public Categoria(Long id, String nome, List<SubCategoria> subCategoria) {
-		this.id = id;
-		this.nome = nome;
 		this.subCategoria = subCategoria;
 	}
 

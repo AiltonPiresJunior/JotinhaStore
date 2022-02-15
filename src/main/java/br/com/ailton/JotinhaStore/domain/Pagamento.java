@@ -22,7 +22,7 @@ public class Pagamento implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long pagamento_id;
 	private Instant momento;
 		
 	@JsonIgnore
@@ -34,18 +34,18 @@ public class Pagamento implements Serializable{
 		
 	}
 
-	public Pagamento(Long id, Instant momento, Pedido pedido_id) {
-		this.id = id;
+	public Pagamento(Long pagamento_id, Instant momento, Pedido pedido_id) {
+		this.pagamento_id = pagamento_id;
 		this.momento = momento;
 		this.pedido = pedido_id;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getPagamentoId() {
+		return pagamento_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long pagamento_id) {
+		this.pagamento_id = pagamento_id;
 	}
 
 	public Instant getMomento() {
@@ -68,7 +68,7 @@ public class Pagamento implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((pagamento_id == null) ? 0 : pagamento_id.hashCode());
 		return result;
 	}
 
@@ -81,10 +81,10 @@ public class Pagamento implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Pagamento other = (Pagamento) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (pagamento_id == null) {
+			if (other.pagamento_id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!pagamento_id.equals(other.pagamento_id))
 			return false;
 		return true;
 	}

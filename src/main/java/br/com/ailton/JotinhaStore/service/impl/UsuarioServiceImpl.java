@@ -41,7 +41,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Usuario usuario = usuarioMapper.toEntidade(usuarioDTO);
 		
 		usuarioRepository.save(usuario);
-				
+		
 		return usuarioMapper.toDto(usuario);
 	}
 

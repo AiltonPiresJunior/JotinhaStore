@@ -11,7 +11,7 @@ public interface SubCategoriaService {
 
 	List<SubCategoria> findAll();
 
-	SubCategoria findById(Long id);
+	SubCategoria findCategoriaById(Long id);
 
 	SubCategoriaDTO cadastraSubCategoria(SubCategoriaDTO subCategoriaDTO);
 

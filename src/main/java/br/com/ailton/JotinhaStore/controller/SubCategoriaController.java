@@ -32,22 +32,21 @@ public class SubCategoriaController {
 	@GetMapping(value = "/all")
 	@ApiOperation(value = "Listar todas as SubCategorias")
 	public List<SubCategoria> findAll(){
-		
 		List<SubCategoria> subCategoria = subCategoriaService.findAll();
+		
 		return subCategoria;
 	}
 	
 	@GetMapping(value = "/{id}")
 	@ApiOperation(value = "Buscar SubCategoria por Id")
 	public ResponseEntity<SubCategoria> findById(@PathVariable Long id) {
-		SubCategoria subCategoria = subCategoriaService.findById(id);
+		SubCategoria subCategoria = subCategoriaService.findCategoriaById(id);
 		return ResponseEntity.ok().body(subCategoria);
 	}
 	
 	@PostMapping
 	@ApiOperation(value = "Cadastra uma SubCategoria")
 	public ResponseEntity<SubCategoriaDTO> cadastraSubCategoria(@RequestBody @Valid SubCategoriaDTO subCategoriaDTO) {
-		
 		subCategoriaDTO = subCategoriaService.cadastraSubCategoria(subCategoriaDTO);
 		
 		return ResponseEntity.ok().body(subCategoriaDTO);
@@ -56,7 +55,6 @@ public class SubCategoriaController {
 	@PutMapping(value = "/{id}")
 	@ApiOperation(value = "Altera SubCategoria por Id")
 	public ResponseEntity<SubCategoriaDTO> alteraSubCategoria(Long id, @RequestBody @Valid SubCategoriaDTO subCategoriaDTO) {
-		
 		subCategoriaDTO = subCategoriaService.alteraSubCategoria(id, subCategoriaDTO);
 		
 		return ResponseEntity.ok().body(subCategoriaDTO);

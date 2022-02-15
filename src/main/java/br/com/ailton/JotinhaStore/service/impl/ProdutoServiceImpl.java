@@ -4,11 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.com.ailton.JotinhaStore.domain.Produto;
+import br.com.ailton.JotinhaStore.dto.ProdutoDTO;
+import br.com.ailton.JotinhaStore.enumerations.ErrorsEnum;
+import br.com.ailton.JotinhaStore.mapper.ProdutoMapper;
 import br.com.ailton.JotinhaStore.repository.ProdutoRepository;
 import br.com.ailton.JotinhaStore.service.ProdutoService;
+import br.com.ailton.JotinhaStore.service.exception.BusinessException;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService{
@@ -16,13 +21,24 @@ public class ProdutoServiceImpl implements ProdutoService{
 	@Autowired
 	public ProdutoRepository produtoRepository;
 	
+	@Autowired
+	public ProdutoMapper produtoMapper;
+	
 	public List<Produto> findAll() {
 		List<Produto> lista = produtoRepository.findAll();
 		return lista;
 	}
 
-	public Produto findById(Long id) {
-		Optional<Produto> produto = produtoRepository.findById(id);
-		return produto.get();
+	public Produto findProdutoById(Long id) {
+		return produtoRepository.findById(id)
+                .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, ErrorsEnum.NAO_ENCONTROU));
+	}
+
+	public ProdutoDTO cadastraProduto(ProdutoDTO produtoDTO) {
+		Produto produto = produtoMapper.toEntidade(produtoDTO);
+		
+		produtoRepository.save(produto);
+		
+		return produtoMapper.toDto(produto);
 	}
 }

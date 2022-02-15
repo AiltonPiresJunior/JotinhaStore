@@ -11,8 +11,8 @@ import br.com.ailton.JotinhaStore.dto.UsuarioDTO;
 public interface UsuarioService {
 
 	List<Usuario> findAll();
-
-	Usuario findById(Long id);
+	
+	Usuario findUsuarioById(Long id);
 
 	UsuarioDTO cadastraUsuario(UsuarioDTO usuarioDTO);
 

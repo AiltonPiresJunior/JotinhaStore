@@ -10,11 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.ailton.JotinhaStore.domain.Categoria;
 import br.com.ailton.JotinhaStore.domain.SubCategoria;
 import br.com.ailton.JotinhaStore.dto.SubCategoriaDTO;
 import br.com.ailton.JotinhaStore.enumerations.ErrorsEnum;
 import br.com.ailton.JotinhaStore.mapper.SubCategoriaMapper;
 import br.com.ailton.JotinhaStore.repository.SubCategoriaRepository;
+import br.com.ailton.JotinhaStore.service.CategoriaService;
 import br.com.ailton.JotinhaStore.service.SubCategoriaService;
 
 @Service
@@ -26,19 +28,15 @@ public class SubCategoriaServiceImpl implements SubCategoriaService{
 	@Autowired
 	SubCategoriaMapper subCategoriaMapper;
 	
+	@Autowired
+	public CategoriaService categoriaService;
+	
 	public List<SubCategoria> findAll() {
 		List<SubCategoria> lista = subCategoriaRepository.findAll();
 		return lista;
 	}
 
-	public SubCategoria findById(Long id) {
-		Optional<SubCategoria> subCategoria = subCategoriaRepository.findById(id);
-		return subCategoria.get();
-	}
-
 	public SubCategoriaDTO cadastraSubCategoria(@Valid SubCategoriaDTO subCategoriaDTO) {
-		
-		
 		SubCategoria categoria = subCategoriaMapper.toEntidade(subCategoriaDTO);
 		
 		subCategoriaRepository.save(categoria);
@@ -50,7 +48,7 @@ public class SubCategoriaServiceImpl implements SubCategoriaService{
 
 		SubCategoria subCategoria = findCategoriaById(id);
 		
-		subCategoria.setCategoria(subCategoriaDTO.getId_categoria());
+		subCategoria.setCategoria(categoriaService.findCategoriaById(subCategoriaDTO.getId_categoria()));
 		subCategoria.setNome(subCategoriaDTO.getNome());
 		
 		subCategoriaRepository.save(subCategoria);

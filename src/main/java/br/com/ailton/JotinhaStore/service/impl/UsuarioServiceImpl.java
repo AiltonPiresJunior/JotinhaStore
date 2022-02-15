@@ -31,11 +31,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return lista;
 	}
 
-	public Usuario findById(Long id) {
-		Optional<Usuario> usuario = usuarioRepository.findById(id);
-		return findUsuarioById(id);
-	}
-
 	public UsuarioDTO cadastraUsuario(UsuarioDTO usuarioDTO) {
 		
 		Usuario usuario = usuarioMapper.toEntidade(usuarioDTO);
@@ -59,7 +54,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return usuarioMapper.toDto(usuario);
 	}
 
-	private Usuario findUsuarioById(Long id) {
+	public Usuario findUsuarioById(Long id) {
 		
 		return usuarioRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, ErrorsEnum.NAO_ENCONTROU));

@@ -40,7 +40,7 @@ public class UsuarioController {
 	@GetMapping(value = "/{id}")
 	@ApiOperation(value = "Buscar Usuario por Id")
 	public ResponseEntity<Usuario> findById(@PathVariable Long id) {
-		Usuario usuario = usuarioService.findById(id);
+		Usuario usuario = usuarioService.findUsuarioById(id);
 		return ResponseEntity.ok().body(usuario);
 	}
 	

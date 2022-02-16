@@ -11,6 +11,8 @@ public interface PagamentoService {
 
 	PagamentoDTO findPagamentoById(Long id);
 
-	Pagamento cadastraPagamento(PagamentoDTO pagamentoDTO);
+	PagamentoDTO cadastraPagamento(PagamentoDTO pagamentoDTO);
+
+	PagamentoDTO alteraPagamento(PagamentoDTO pagamentoDTO, Long id);
 
 }

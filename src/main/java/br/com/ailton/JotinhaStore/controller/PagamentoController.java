@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +43,13 @@ public class PagamentoController {
 	
 	@PostMapping
 	@ApiOperation(value = "Cadastra pagamento")
-	public ResponseEntity<Pagamento> cadastrarPagamento(@RequestBody PagamentoDTO pagamentoDTO){
+	public ResponseEntity<PagamentoDTO> cadastrarPagamento(@RequestBody PagamentoDTO pagamentoDTO){
 		return ResponseEntity.ok().body(pagamentoService.cadastraPagamento(pagamentoDTO));
+	}
+	
+	@PutMapping(value = "/{id}")
+	@ApiOperation(value = "Altera pagamento por id")
+	public ResponseEntity<PagamentoDTO> alterarPagamento(@RequestBody PagamentoDTO pagamentoDTO, Long id){
+		return ResponseEntity.ok().body(pagamentoService.alteraPagamento(pagamentoDTO, id));
 	}
 }

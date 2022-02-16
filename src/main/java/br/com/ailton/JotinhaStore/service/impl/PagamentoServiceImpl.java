@@ -13,6 +13,7 @@ import br.com.ailton.JotinhaStore.enumerations.ErrorsEnum;
 import br.com.ailton.JotinhaStore.mapper.PagamentoMapper;
 import br.com.ailton.JotinhaStore.repository.PagamentoRepository;
 import br.com.ailton.JotinhaStore.service.PagamentoService;
+import br.com.ailton.JotinhaStore.service.PedidoService;
 import br.com.ailton.JotinhaStore.service.exception.BusinessException;
 
 @Service
@@ -23,6 +24,9 @@ public class PagamentoServiceImpl implements PagamentoService{
 	
 	@Autowired
 	public PagamentoMapper pagamentoMapper;
+	
+	@Autowired
+	public PedidoService pedidoService;
 	
 	public List<PagamentoDTO> findAll() {
 		
@@ -40,13 +44,22 @@ public class PagamentoServiceImpl implements PagamentoService{
                 .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, ErrorsEnum.NAO_ENCONTROU)));
 	}
 
-	public Pagamento cadastraPagamento(PagamentoDTO pagamentoDTO) {
+	public PagamentoDTO cadastraPagamento(PagamentoDTO pagamentoDTO) {
 		Pagamento pagamento = pagamentoMapper.toEntidade(pagamentoDTO);
 		
 		pagamentoRepository.save(pagamento);
 		
-		return pagamento;
+		return pagamentoMapper.toDto(pagamento);
 	}
 
-	
+	public PagamentoDTO alteraPagamento(PagamentoDTO pagamentoDTO, Long id) {
+		Pagamento pagamento = pagamentoMapper.toEntidade(findPagamentoById(id));
+		
+		pagamento.setMomento(pagamentoDTO.getMomento());
+		pagamento.setPedido(pedidoService.findPedidoById(pagamentoDTO.getPedido()));
+
+		pagamentoRepository.save(pagamento);
+		
+		return pagamentoMapper.toDto(pagamento);
+	}
 }

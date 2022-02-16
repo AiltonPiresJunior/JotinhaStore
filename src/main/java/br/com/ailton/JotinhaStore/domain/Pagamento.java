@@ -39,54 +39,5 @@ public class Pagamento implements Serializable{
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
-	private Pedido pedido;
-
-	public void setId(Long pagamento_id) {
-		this.pagamento_id = pagamento_id;
-	}
-
-	public Instant getMomento() {
-		return momento;
-	}
-
-	public void setMomento(Instant momento) {
-		this.momento = momento;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((pagamento_id == null) ? 0 : pagamento_id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pagamento other = (Pagamento) obj;
-		if (pagamento_id == null) {
-			if (other.pagamento_id != null)
-				return false;
-		} else if (!pagamento_id.equals(other.pagamento_id))
-			return false;
-		return true;
-	}
-	
-	
-	
-	
+	private Pedido pedido;	
 }

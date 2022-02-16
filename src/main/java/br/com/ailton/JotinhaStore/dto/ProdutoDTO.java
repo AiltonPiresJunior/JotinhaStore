@@ -1,9 +1,5 @@
 package br.com.ailton.JotinhaStore.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import br.com.ailton.JotinhaStore.domain.SubCategoria;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ProdutoDTO {
 	
+	private Long id;
 	private String nome;
 	private String descricao;
 	private Double preco;

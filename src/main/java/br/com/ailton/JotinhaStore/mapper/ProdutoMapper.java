@@ -20,6 +20,7 @@ public class ProdutoMapper {
 		}
 		else {
 			return ProdutoDTO.builder()
+					.id(entidade.getId())
 					.nome(entidade.getNome())
 					.descricao(entidade.getDescricao())
 					.preco(entidade.getPreco())
@@ -35,6 +36,7 @@ public class ProdutoMapper {
 		}
 		else {
 			return Produto.builder()
+					.id(dto.getId())
 					.nome(dto.getNome())
 					.descricao(dto.getDescricao())
 					.preco(dto.getPreco())

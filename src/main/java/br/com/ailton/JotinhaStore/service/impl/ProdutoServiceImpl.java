@@ -13,6 +13,7 @@ import br.com.ailton.JotinhaStore.enumerations.ErrorsEnum;
 import br.com.ailton.JotinhaStore.mapper.ProdutoMapper;
 import br.com.ailton.JotinhaStore.repository.ProdutoRepository;
 import br.com.ailton.JotinhaStore.service.ProdutoService;
+import br.com.ailton.JotinhaStore.service.SubCategoriaService;
 import br.com.ailton.JotinhaStore.service.exception.BusinessException;
 
 @Service
@@ -23,6 +24,9 @@ public class ProdutoServiceImpl implements ProdutoService{
 	
 	@Autowired
 	public ProdutoMapper produtoMapper;
+	
+	@Autowired
+	public SubCategoriaService subCategoriaService;
 	
 	public List<Produto> findAll() {
 		List<Produto> lista = produtoRepository.findAll();
@@ -36,6 +40,20 @@ public class ProdutoServiceImpl implements ProdutoService{
 
 	public ProdutoDTO cadastraProduto(ProdutoDTO produtoDTO) {
 		Produto produto = produtoMapper.toEntidade(produtoDTO);
+		
+		produtoRepository.save(produto);
+		
+		return produtoMapper.toDto(produto);
+	}
+
+	public ProdutoDTO alteraProduto(ProdutoDTO produtoDTO, Long id) {
+		Produto produto = findProdutoById(id);
+		
+		produto.setDescricao(produtoDTO.getDescricao());
+		produto.setNome(produtoDTO.getNome());
+		produto.setPreco(produtoDTO.getPreco());
+		produto.setImgUrl(produtoDTO.getImgUrl());
+		produto.setSubCategoria(subCategoriaService.findCategoriaById(produtoDTO.getSubCategoria()));
 		
 		produtoRepository.save(produto);
 		

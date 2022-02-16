@@ -12,4 +12,6 @@ public interface ProdutoService {
 	Produto findProdutoById(Long id);
 
 	ProdutoDTO cadastraProduto(ProdutoDTO produtoDTO);
+
+	ProdutoDTO alteraProduto(ProdutoDTO produtoDTO, Long id);
 }

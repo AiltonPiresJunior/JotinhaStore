@@ -3,12 +3,14 @@ package br.com.ailton.JotinhaStore.service;
 import java.util.List;
 
 import br.com.ailton.JotinhaStore.domain.Pagamento;
-import br.com.ailton.JotinhaStore.domain.Pedido;
+import br.com.ailton.JotinhaStore.dto.PagamentoDTO;
 
 public interface PagamentoService {
 
-	List<Pagamento> findAll();
+	List<PagamentoDTO> findAll();
 
-	Pagamento findById(Long id);
+	PagamentoDTO findPagamentoById(Long id);
+
+	Pagamento cadastraPagamento(PagamentoDTO pagamentoDTO);
 
 }

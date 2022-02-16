@@ -8,5 +8,5 @@ public interface PedidoService {
 
 	List<Pedido> findAll();
 
-	Pedido findById(Long id);
+	Pedido findPedidoById(Long id);
 }

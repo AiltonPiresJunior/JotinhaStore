@@ -16,8 +16,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.ailton.JotinhaStore.enumerations.PedidoStatusEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.ailton.JotinhaStore.enumerations.PedidoStatusEnum;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Pedido")
 public class Pedido implements Serializable{
@@ -40,9 +50,6 @@ public class Pedido implements Serializable{
 	@OneToOne(mappedBy = "pedido")
 	private Pagamento pagamento;
 	
-	public Pedido() {
-		
-	}
 
 	public Pedido(Long id, Instant momento,PedidoStatusEnum pedidoStatus,  Usuario cliente) {
 		super();

@@ -2,6 +2,7 @@ package br.com.ailton.JotinhaStore.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.ailton.JotinhaStore.enumerations.PedidoStatusEnum;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Pagamento")
 public class Pagamento implements Serializable{
@@ -29,20 +40,6 @@ public class Pagamento implements Serializable{
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
-	
-	public Pagamento() {
-		
-	}
-
-	public Pagamento(Long pagamento_id, Instant momento, Pedido pedido_id) {
-		this.pagamento_id = pagamento_id;
-		this.momento = momento;
-		this.pedido = pedido_id;
-	}
-
-	public Long getPagamentoId() {
-		return pagamento_id;
-	}
 
 	public void setId(Long pagamento_id) {
 		this.pagamento_id = pagamento_id;

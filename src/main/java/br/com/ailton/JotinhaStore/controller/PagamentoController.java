@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ailton.JotinhaStore.domain.Pagamento;
+import br.com.ailton.JotinhaStore.dto.PagamentoDTO;
 import br.com.ailton.JotinhaStore.service.PagamentoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,17 +26,23 @@ public class PagamentoController {
 	public PagamentoService pagamentoService;
 
 	@GetMapping(value = "/all")
-	@ApiOperation(value = "Listar todos os pagamentos")
-	public List<Pagamento> findAll(){
+	@ApiOperation(value = "Lista todos os pagamentos")
+	public List<PagamentoDTO> findAll(){
 		
-		List<Pagamento> pagamento = pagamentoService.findAll();
+		List<PagamentoDTO> pagamento = pagamentoService.findAll();
 		return pagamento;
 	}
 
 	@GetMapping(value = "/{id}")
-	@ApiOperation(value = "Buscar pagamento por Id")
-	public ResponseEntity<Pagamento> findById(@PathVariable Long id) {
-		Pagamento pedido = pagamentoService.findById(id);
+	@ApiOperation(value = "Busca pagamento por Id")
+	public ResponseEntity<PagamentoDTO> findById(@PathVariable Long id) {
+		PagamentoDTO pedido = pagamentoService.findPagamentoById(id);
 		return ResponseEntity.ok().body(pedido);
+	}
+	
+	@PostMapping
+	@ApiOperation(value = "Cadastra pagamento")
+	public ResponseEntity<Pagamento> cadastrarPagamento(@RequestBody PagamentoDTO pagamentoDTO){
+		return ResponseEntity.ok().body(pagamentoService.cadastraPagamento(pagamentoDTO));
 	}
 }

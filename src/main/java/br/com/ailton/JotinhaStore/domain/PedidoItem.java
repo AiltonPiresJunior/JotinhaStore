@@ -1,6 +1,7 @@
 package br.com.ailton.JotinhaStore.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -9,19 +10,26 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.ailton.JotinhaStore.domain.PK.PedidoItemPK;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Pedido_Item")
 public class PedidoItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@EmbeddedId
 	private PedidoItemPK id = new PedidoItemPK(); 
 	private Integer quantidade;
 	private Double preco;
 	
-	public PedidoItem() {
-	}
 	public PedidoItem(Pedido pedido, Produto produto,  Integer quantidade, Double preco) {
 		id.setPedido(pedido);
 		id.setProduto(produto);
@@ -41,10 +49,6 @@ public class PedidoItem implements Serializable {
 		this.preco = preco;
 	}
 	
-	@JsonIgnore
-	public Pedido getPedido() {
-		return id.getPedido();
-	}
 	
 	public void setPedido(Pedido pedido) {
 		id.setPedido(pedido);

@@ -33,7 +33,7 @@ public class PedidoController {
 	@GetMapping(value = "/{id}")
 	@ApiOperation(value = "Buscar Usuario por Id")
 	public ResponseEntity<Pedido> findById(@PathVariable Long id) {
-		Pedido pedido = pedidoService.findById(id);
+		Pedido pedido = pedidoService.findPedidoById(id);
 		return ResponseEntity.ok().body(pedido);
 	}
 	

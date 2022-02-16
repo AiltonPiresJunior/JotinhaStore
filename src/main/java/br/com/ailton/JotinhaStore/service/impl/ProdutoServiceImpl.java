@@ -59,4 +59,12 @@ public class ProdutoServiceImpl implements ProdutoService{
 		
 		return produtoMapper.toDto(produto);
 	}
+
+	public ProdutoDTO deletaProduto(Long id) {
+		Produto produto = findProdutoById(id);
+		
+		produtoRepository.delete(produto);
+		
+		return produtoMapper.toDto(produto);
+	}
 }

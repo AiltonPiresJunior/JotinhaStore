@@ -14,4 +14,6 @@ public interface ProdutoService {
 	ProdutoDTO cadastraProduto(ProdutoDTO produtoDTO);
 
 	ProdutoDTO alteraProduto(ProdutoDTO produtoDTO, Long id);
+
+	ProdutoDTO deletaProduto(Long id);
 }
